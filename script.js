@@ -4,6 +4,7 @@ const videoGamesSalesURL = 'https://cdn.freecodecamp.org/testable-projects-fcc/d
 let videoGamesData
 
 let canvas = d3.select('#canvas')
+let tooltip = d3.select('#tooltip')
 
 function drawTreeMap() {
 
@@ -91,13 +92,18 @@ function drawTreeMap() {
         .attr('height', (game) => {
             return game['y1'] - game['y0']
         })
+        .on('mouseover', (game) => {
+            tooltip.transition()
+                    .style('visibility', 'visible')
+                    .attr('data-value', game['data']['value'])
+                    .text(game['data']['name'] + ', value: ' + game['data']['value'])
+        })
+        .on('mouseout', (item) => {
+            tooltip.transition()
+                    .style('visibility', 'hidden');
+        })
 
     block.append('text')
-        // .text((game) => {
-        //     return game['data']['name']
-        // })
-        // .attr('x', 5)
-        // .attr('y', 10)
         .selectAll('tspan')
       .data(function (game) {
         return game.data.name.split(/(?=[A-Z][^A-Z])/g);

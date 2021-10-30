@@ -35,3 +35,10 @@ rect {
     height: 200px;
     font-size: 12px;
 }
+
+#tooltip {
+    visibility: hidden;
+    width: auto;
+    height: 20px;
+    padding-bottom: 10px;
+}
